@@ -17,6 +17,59 @@ jsPsychには、実験の進行に合わせて構築されるデータの一元�
 
 
 ```
-code
+// generate a random subject ID with 15 characters
+var subject_id = jsPsych.randomization.randomID(15);
+
+// pick a random condition for the subject at the start of the experiment
+var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['conditionA', 'conditionB', 'conditionC'], 1)[0];
+
+// record the condition assignment in the jsPsych data
+// this adds a property called 'subject' and a property called 'condition' to every trial
+jsPsych.data.addProperties({
+  subject: subject_id,
+  condition: condition_assignment
+});
+```
+
+## 特定のトライアルやトライアルセットへのデータの追加
+
+特定のトライアルにデータを追加するには、そのトライアルのデータパラメータを設定する。data parameterはkey-valueペアのオブジェクトであり、各ペアはそのトライアルのデータに追加される。
 
 ```
+var trial = {
+  type: 'image-keyboard-response',
+  stimulus: 'imgA.jpg',
+  data: { image_type: 'A' }
+}
+```
+
+このように宣言されたデータは、入れ子になっているタイムラインのトライアルにも保存されます。
+
+```
+var block = {
+  type: 'image-keyboard-response',
+  data: { image_type: 'A' },
+  timeline: [
+    {stimulus: 'imgA1.jpg'},
+    {stimulus: 'imgA2.jpg'}
+  ]
+}
+```
+
+トライアルのデータオブジェクトは、on_finishイベントハンドラでも更新できます。プロパティを上書きしたり、新しいプロパティを追加することができます。これは、値がトライアル中に起こったことに依存するような場合に特に有効です。
+
+```
+var trial = {
+  type: 'image-keyboard-response',
+  stimulus: 'imgA.jpg',
+  on_finish: function(data){
+    if(jsPsych.pluginAPI.compareKeys(data.response, 'j')){
+      data.correct = true;
+    } else {
+      data.correct = false;
+    }
+  }
+}
+```
+
+
