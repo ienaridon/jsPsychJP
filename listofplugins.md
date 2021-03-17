@@ -138,7 +138,14 @@ Wang, Cavanagh, & Green (1994)をモデルとしたカスタマイズ可能な�
 ### jspsych‑vsl‑animate‑occlusion
 Fiser & Aslin (2002) に基づいた視覚的統計学習パラダイム。一連の刺激が振動しながら表示される。ディスプレイの中央には遮蔽用の長方形があり、刺激は長方形の後ろに来ると変化するようになっている。
 
+### jspsych‑vsl‑grid‑scene
+Fiser & Aslin (2001)に基づいた視覚的統計学習パラダイム。グリッド状に配置された個々の刺激で構成されたシーンが表示されます。このプラグインは、他のプラグインで使用するために、刺激をレンダリングするためのHTMLコードを生成することもできます。
 
+### jspsych‑webgazer‑calibrate
+WebGazerエクステンションのアイトラッキングのキャリブレーションを行います。(なんのこっちゃ)
 
+### jspsych‑webgazer‑init‑camera
+カメラを初期化し、アイトラッキングのために参加者が顔の中心を合わせやすくします。
 
-
+### jspsych‑webgazer‑validate
+WebGazerのアイトラッキング予測の精度と正確さを測定するための検証を行います。
